@@ -1,10 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div>
-      <h3>헤더</h3>
-    </div>
+    <header className="header">
+      <div className="header-nav">
+        <Link to="com" className="header-item">
+          Community
+        </Link>
+        <Link to="dash" className="header-item">
+          DashBoard
+        </Link>
+        <Link to="my" className="header-item">
+          MyPage
+        </Link>
+      </div>
+    </header>
   );
 };
 

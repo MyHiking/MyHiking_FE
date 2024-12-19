@@ -1,7 +1,11 @@
 import React from "react";
 
 const SignPage = () => {
-  return <div></div>;
+  return (
+    <div>
+      <h3>SignPage</h3>
+    </div>
+  );
 };
 
 export default SignPage;
