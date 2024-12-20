@@ -7,6 +7,8 @@ import Community from "./components/Community/Community";
 import DashBoard from "./components/DashBoard/DashBoard";
 import MyPage from "./components/MyPage/MyPage";
 import Header from "./components/Layout/Header";
+import LoginPage from "./components/LoginPage/LoginPage";
+import SignPage from "./components/SignPage/SignPage";
 
 function App() {
   return (
@@ -19,6 +21,9 @@ function App() {
             <Route path="/com" element={<Community />} />
             <Route path="/dash" element={<DashBoard />} />
             <Route path="/my" element={<MyPage />} />
+
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/sign" element={<SignPage />} />
           </Routes>
         </main>
       </div>
