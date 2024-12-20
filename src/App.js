@@ -18,7 +18,7 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/com" element={<Community />} />
             <Route path="/dash" element={<DashBoard />} />
-            <Route path="/my" elemen={<MyPage />} />
+            <Route path="/my" element={<MyPage />} />
           </Routes>
         </main>
       </div>
