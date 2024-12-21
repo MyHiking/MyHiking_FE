@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.sign-header {
+  height: 50px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1); /* 하단에만 그림자 효과 */
+}
+.header-logo > h2 {
+  color: #1b9030;
+  font-size: 24px;
+  margin-left: 20px;
+}
