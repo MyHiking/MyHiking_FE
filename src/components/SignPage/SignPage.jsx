@@ -1,39 +1,60 @@
-// 2단계: 입력 필드들 추가
-import React from "react";
+import React, { useState } from "react";
 
 const RegisterPage = () => {
+  const [email, setEmail] = useState("");
+  const [authCode, setAuthCode] = useState("");
+  const [inputAuthCode, setInputAuthCode] = useState("");
+  const [password, setPasswotd] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [nickname, setNickname] = useState("");
+
   return (
-    <div>
-      <h2>회원가입</h2>
-      <form>
-        {/* 1. 이메일 */}
-        <div>
-          <label>이메일</label>
-          <input type="email" placeholder="이메일 입력" />
+    <div className="register-page-container">
+      <h2 className="register-title">회원가입</h2>
+      <form className="register-form">
+        <div className="form-group">
+          <label className="input-label">이메일</label>
+          <input
+            type="email"
+            className="input-field"
+            placeholder="이메일 입력"
+          />
         </div>
 
-        {/* 2. 인증번호 */}
-        <div>
-          <label>인증번호</label>
-          <input type="text" placeholder="인증번호 입력" />
+        <div className="form-group">
+          <label className="input-label">인증번호</label>
+          <input
+            type="text"
+            className="input-field"
+            placeholder="인증번호 입력"
+          />
         </div>
 
-        {/* 3. 비밀번호 */}
-        <div>
-          <label>비밀번호</label>
-          <input type="password" placeholder="비밀번호 입력" />
+        <div className="form-group">
+          <label className="input-label">비밀번호</label>
+          <input
+            type="password"
+            className="input-field"
+            placeholder="비밀번호 입력"
+          />
         </div>
 
-        {/* 4. 비밀번호 확인 */}
-        <div>
-          <label>비밀번호 확인</label>
-          <input type="password" placeholder="비밀번호 확인" />
+        <div className="form-group">
+          <label className="input-label">비밀번호 확인</label>
+          <input
+            type="password"
+            className="input-field"
+            placeholder="비밀번호 확인"
+          />
         </div>
 
-        {/* 5. 닉네임 */}
-        <div>
-          <label>닉네임</label>
-          <input type="text" placeholder="닉네임 입력" />
+        <div className="form-group">
+          <label className="input-label">닉네임</label>
+          <input
+            type="text"
+            className="input-field"
+            placeholder="닉네임 입력"
+          />
         </div>
       </form>
     </div>
