@@ -1,141 +1,135 @@
 import React, { useEffect, useState } from "react";
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState("");
-  const [authCode, setAuthCode] = useState("123456");
-  const [inputAuthCode, setInputAuthCode] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [countdown, setCountdown] = useState(0);
+  const [userEmail, setUserEmail] = useState(""); // 사용자가 입력한 이메일
+  const [code, setCode] = useState(""); // 서버에서 받은 인증코드
+  const [userCode, setUserCode] = useState(""); // 사용자가 입력한 인증코드
+  const [userPassword, setUserPassword] = useState(""); // 사용자가 입력한 비밀번호
+  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
+  const [username, setUsername] = useState(""); // 사용자가 입력한 닉네임
+  const [timer, setTimer] = useState(0); // 인증 제한 타이머 값
+  const [isCodeVerified, setIsCodeVerified] = useState(false); // 인증 성공 여부
 
   useEffect(() => {
-    let timer;
-    if (countdown > 0) {
-      timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+    let countdownTimer;
+    if (timer > 0) {
+      countdownTimer = setTimeout(() => setTimer(timer - 1), 1000);
     }
-    return () => clearTimeout(timer);
-  }, [countdown]);
+    return () => clearTimeout(countdownTimer);
+  }, [timer]);
 
-  // 이메일 인증 버튼 클릭 시 호출
-  const sendEmailVerification = () => {
-    if (countdown > 0) {
-      alert("인증 코드는 60초 후에 다시 요청할 수 있습니다.");
+  const handleEmailVerification = (e) => {
+    e.preventDefault();
+    if (timer > 0) {
+      alert("재인증은 60초 후에 가능합니다.");
       return;
     }
-    setAuthCode("123456"); // 가짜 인증 코드 설정
-    setCountdown(10); // 60초 카운트다운 시작
-    alert("인증 코드가 이메일로 전송되었습니다. (123456)");
+
+    const mockCode = "123456"; // 테스트용 인증 코드
+    setCode(mockCode);
+    setTimer(60); // 60초 타이머 시작
+    alert(`테스트용 인증 코드: ${mockCode}`);
   };
 
-  const verifyAuthCode = () => {
-    if (authCode === inputAuthCode) {
+  const handleCodeCheck = () => {
+    if (userCode === code) {
+      setIsCodeVerified(true);
       alert("인증 성공!");
     } else {
-      alert("인증 실패. 인증 코드를 다시 확인하세요.");
+      alert("인증 실패. 인증코드를 확인해주세요.");
     }
   };
 
-  const handleSubmit = () => {
-    if (!email.includes("@")) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!userEmail.includes("@")) {
       alert("올바른 이메일을 입력해 주세요.");
       return;
     }
-    if (authCode !== inputAuthCode) {
-      alert("인증번호가 일치하지 않습니다.");
+    if (!isCodeVerified) {
+      alert("이메일 인증이 필요합니다.");
       return;
     }
-    if (password !== confirmPassword) {
+    if (userPassword !== confirmPassword) {
       alert("비밀번호가 서로 다릅니다.");
       return;
     }
-    if (nickname.trim().length < 2) {
+    if (username.trim().length < 2) {
       alert("닉네임은 2자 이상이어야 합니다.");
       return;
     }
-    console.log("회원가입 성공!");
-    console.log({ email, password, nickname });
+    alert("회원가입 성공!");
+    console.log({ userEmail, userPassword, username });
   };
 
   return (
     <div className="register-page-container">
       <h2 className="register-title">회원가입</h2>
-      <form className="register-form">
+      <form className="register-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="input-label">이메일</label>
+          <label>이메일</label>
           <input
             type="email"
-            className="input-field"
+            value={userEmail}
+            onChange={(e) => setUserEmail(e.target.value)}
             placeholder="이메일 입력"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            required
           />
-          <button
-            type="button"
-            onClick={sendEmailVerification}
-            className="email-verification-button"
-          >
+          <button type="button" onClick={handleEmailVerification}>
             이메일 인증
           </button>
         </div>
 
         <div className="form-group">
-          <label className="input-label">인증번호</label>
+          <label>인증번호</label>
           <input
             type="text"
-            className="input-field"
+            value={userCode}
+            onChange={(e) => setUserCode(e.target.value)}
             placeholder="인증번호 입력"
-            value={inputAuthCode}
-            onChange={(e) => setInputAuthCode(e.target.value)}
+            required
           />
-          <button
-            type="button"
-            onClick={verifyAuthCode}
-            className="auth-code-verification-button"
-          >
+          <button type="button" onClick={handleCodeCheck}>
             인증코드 확인
           </button>
         </div>
 
         <div className="form-group">
-          <label className="input-label">비밀번호</label>
+          <label>비밀번호</label>
           <input
             type="password"
-            className="input-field"
+            value={userPassword}
+            onChange={(e) => setUserPassword(e.target.value)}
             placeholder="비밀번호 입력"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
 
         <div className="form-group">
-          <label className="input-label">비밀번호 확인</label>
+          <label>비밀번호 확인</label>
           <input
             type="password"
-            className="input-field"
-            placeholder="비밀번호 확인"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="비밀번호 확인"
+            required
           />
         </div>
 
         <div className="form-group">
-          <label className="input-label">닉네임</label>
+          <label>닉네임</label>
           <input
             type="text"
-            className="input-field"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="닉네임 입력"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
+            required
           />
         </div>
 
-        {/* 타이머 표시 */}
-        <p>남은 시간: {countdown > 0 ? `${countdown}초` : "타이머 종료"}</p>
+        <p>남은 시간: {timer > 0 ? `${timer}초` : "재전송 가능"}</p>
 
-        <button type="button" className="submit-button" onClick={handleSubmit}>
-          회원가입
-        </button>
+        <button type="submit">회원가입</button>
       </form>
     </div>
   );
