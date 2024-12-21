@@ -1,58 +1,43 @@
+// 2단계: 입력 필드들 추가
 import React from "react";
-import "../Style/signpage.scss";
-import SignHeader from "./SignHeader";
 
-const SignPage = () => {
+const RegisterPage = () => {
   return (
-    <div className="signPage">
-      <SignHeader />
-      <div className="sign-content">
-        <h2>회원가입</h2>
-        <form className="register-form">
-          <div className="form-group">
-            <label>이메일</label>
-            <div className="email-input">
-              <input type="email" placeholder="이메일" />
-              <button type="button">인증</button>
-            </div>
-            <input className="text" placeholder="인증번호 입력" />
-          </div>
+    <div>
+      <h2>회원가입</h2>
+      <form>
+        {/* 1. 이메일 */}
+        <div>
+          <label>이메일</label>
+          <input type="email" placeholder="이메일 입력" />
+        </div>
 
-          <div className="form-group">
-            <label>비밀번호</label>
-            <input type="password" placeholder="비밀번호 입력" />
-            <input type="password" placeholder="비밀번호 확인" />
-          </div>
+        {/* 2. 인증번호 */}
+        <div>
+          <label>인증번호</label>
+          <input type="text" placeholder="인증번호 입력" />
+        </div>
 
-          <div className="form-group">
-            <label>닉네임</label>
-            <div className="agreement">
-              <div>
-                <input type="checkbox" id="all-agree" />
-                <label htmlFor="all-agree">전체동의</label>
-              </div>
-              <div>
-                <input type="checkbox" id="terms" />
-                <label htmlFor="terms">이용약관</label>
-              </div>
-              <div>
-                <input type="checkbox" id="privacy" />
-                <label htmlFor="privacy">개인정보 수집 및 이용동의</label>
-              </div>
-              <div>
-                <input type="checkbox" id="marketing" />
-                <label htmlFor="marketing">마케팅 이메일 수신</label>
-              </div>
-            </div>
-          </div>
+        {/* 3. 비밀번호 */}
+        <div>
+          <label>비밀번호</label>
+          <input type="password" placeholder="비밀번호 입력" />
+        </div>
 
-          <button type="submit" className="register-btn">
-            회원가입
-          </button>
-        </form>
-      </div>
+        {/* 4. 비밀번호 확인 */}
+        <div>
+          <label>비밀번호 확인</label>
+          <input type="password" placeholder="비밀번호 확인" />
+        </div>
+
+        {/* 5. 닉네임 */}
+        <div>
+          <label>닉네임</label>
+          <input type="text" placeholder="닉네임 입력" />
+        </div>
+      </form>
     </div>
   );
 };
 
-export default SignPage;
+export default RegisterPage;
