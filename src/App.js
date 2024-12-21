@@ -14,6 +14,7 @@ import MyPage from "./components/MyPage/MyPage";
 import Header from "./components/Layout/Header";
 import LoginPage from "./components/LoginPage/LoginPage";
 import SignPage from "./components/SignPage/SignPage";
+import {AuthProvider} from "./contexts/AuthContext";
 
 function AppContent() {
   const location = useLocation();
@@ -22,6 +23,7 @@ function AppContent() {
   const hideHeader = ["/login", "/sign"].includes(location.pathname);
 
   return (
+    <AuthProvider>
     <div className="App">
       {!hideHeader && <Header />}
       <main className="main">
@@ -35,6 +37,7 @@ function AppContent() {
         </Routes>
       </main>
     </div>
+    </AuthProvider>
   );
 }
 
